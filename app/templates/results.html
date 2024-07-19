@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel= "stylesheet" href = "{{ url_for('static', filename='results.css') }}">
+</head>
+<body>
+
+<header>
+<img src="{{ url_for('static', filename='images/Bluboy-Logo-1.jpg') }}" alt="Logo" alignment="border-left" padding-left: 60px;>
+<div style="float: right; padding-right: 20px; color: white;">
+{{ username }}
+<a href="{{ url_for('logout') }}" style="color: white;">Logout</a>
+</div>
+</header>
+<div>
+<a href="{{url_for('option')}}">
+    <div class="options_container">
+        <div class="back-btn flex align-center ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+            Back
+        </div>
+    </div>
+</a>    
+</div>
+<div id="uninstalls-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Date of Creation</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Success List</th>
+                <th>Logout List</th>
+                <th>Uninstalled List</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</div>
+<script>
+    tableBody = document.getElementById("table-body")
+    async function getAllSentNotifications(){
+        await fetch("/uninstalled")
+        .then(response => response.json())
+        .then(data => {
+            for (let i = 0; i < data.length; i++) {
+                const newRow = document.createElement('tr');
+                const success_list = data[i]["success_list"].substring(1,data[i]["success_list"].length -1)
+                console.log(success_list)
+                const logout_list = data[i]["logout_list"].substring(1,data[i]["logout_list"].length -1)
+                const uninstalled_list = data[i]["uninstalled_list"].substring(1,data[i]["uninstalled_list"].length -1)
+                newRow.innerHTML=`
+                <td>${data[i]["timestamp"]}</td>
+                <td>${data[i]["title"]}</td>
+                <td>${data[i]["message"]}</td>
+                <td>
+                    (${success_list === "" ? "0":success_list.split(',').length}) ${success_list}
+                </td>
+                <td>
+                    (${logout_list === "" ? "0":logout_list.split(',').length}) ${logout_list}
+                </td>
+                <td>
+                    (${uninstalled_list === "" ? "0":uninstalled_list.split(',').length}) ${uninstalled_list}
+                </td>
+                `
+                tableBody.appendChild(newRow)
+            }
+        })
+    }
+    getAllSentNotifications()
+</script>
+</body>
+</html>
+
+
+
+
+

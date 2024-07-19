@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='images/loginfullback.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 900px;
+            height: 80%;
+            max-height: 500px;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-section {
+            flex: 1;
+            background: url("{{ url_for('static', filename='images/loginbackground.jpg') }}") no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .overlay-image {
+            max-width: 50%;
+            height: auto;
+        }
+
+        .login-section {
+            flex: 1;
+            padding: 40px; /* Adjusted padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 25px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Slight shadow */
+        }
+
+        .login-section h2 {
+            margin-bottom: 20px; /* Adjusted margin-bottom */
+            color: #333;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 10px; /* Adjusted margin-bottom */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%; /* Full width */
+            padding: 10px;
+            border: none;
+            border-radius: 25px; /* Rounded corners */
+            background-color: #7c788a98; /* Changed background color */
+            color: white; /* Changed text color */
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px; /* Adjusted margin-bottom */
+            width: 100%; /* Full width */
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Added margin-right for spacing */
+        }
+
+        .options a {
+            color: #888;
+            text-decoration: none;
+        }
+
+        button {
+            padding: 15px;
+            background: linear-gradient(to right, #370278, #8f94fb); /* Gradient color */
+            border: none;
+            border-radius: 25px; /* Rounded corners */
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            width: 108%; /* Full width */
+            margin-top: 20px; /* Space above button */
+            display: block; /* Ensure block-level element */
+            margin-left: auto; /* Center horizontally */
+            margin-right: auto; /* Center horizontally */
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #8f94fb, #370278);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <img src="{{ url_for('static', filename='images/loginleft.png') }}" alt="Notification Icon" class="overlay-image">
+        </div>
+        <div class="login-section">
+            <h2>USER LOGIN</h2>
+            <form method="post">
+                <div class="input-group">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="options">
+                    <label><input type="checkbox" name="remember"> Remember</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

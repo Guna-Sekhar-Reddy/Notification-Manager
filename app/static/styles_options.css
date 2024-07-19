@@ -1,0 +1,50 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0E0432;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+header {
+    background-color: #140B37;
+}
+
+header img {
+    padding-left: 48px;
+    padding-top: 30px;
+    max-width: 200px;
+    height: auto;
+    align-items: left;
+}
+
+.full{
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.container{
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.uninstall, .topics{
+    color: white;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #342d4f;
+    border-radius: 8px;
+}
+
+.uninstall svg,.topics svg{
+    width: 125px;
+    height: 125px;
+}

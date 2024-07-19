@@ -1,0 +1,151 @@
+/* static/styles.css */
+ 
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0e0432;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+   
+  header {
+    background-color: #140b37;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+   
+  header img {
+    max-width: 200px;
+    height: auto;
+    padding-top: 10px;
+  }
+   
+  header div {
+    color: white;
+  }
+   
+  a {
+    color: white;
+    text-decoration: none;
+  }
+   
+  /* Main content styles */
+  .options_container {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 5px 5px 20px;
+    margin-left: 60px;
+    margin-top: 20px;
+    width: 150px; /* Adjust width as needed */
+    border-radius: 8px;
+    background-color: #342d4f;
+  }
+   
+  .back-btn {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    gap: 10px;
+    cursor: pointer;
+  }
+   
+  h1 {
+    color: white;
+    padding-left: 60px;
+    margin: 20px 0;
+  }
+   
+  .topic-inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+    margin-bottom: 20px;
+    padding-left: 60px;
+  }
+   
+  .topic-inputs {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+   
+  .topic-inputs input,
+  .topic-inputs textarea,
+  .topic-inputs select {
+    padding: 12px 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #342d4f;
+    color: #ffffff;
+    width: 100%; /* Adjust width as needed */
+  }
+   
+  .topic-inputs textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+   
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+   
+  .justify-center {
+    justify-content: center;
+  }
+   
+  .select-container {
+    flex-grow: 1;
+    margin-left: 10px;
+  }
+   
+  .topic-btn {
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+   
+  #send-button {
+    border: none; /* Remove border from button */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    background: none; /* Remove background */
+  }
+   
+  #send-button img {
+    width: 150px;
+    height: 100px;
+    display: block; /* Remove inline spacing */
+    transition: width 0.3s, height 0.3s; /* Add transition for resizing */
+  }
+   
+  #send-button.shrink img {
+    width: 100px;
+    height: 75px;
+  }
+   
+  .disabled {
+    opacity: 0.5; /* Grey shade for disabled button */
+    pointer-events: none; /* Disable pointer events */
+  }
+   
+  @media only screen and (max-width: 768px) {
+    .topic-inputs-container {
+      width: 100%;
+    }
+   
+    #send-button img {
+      width: 125px;
+      height: 125px;
+    }
+  }
+   

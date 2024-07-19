@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel= "stylesheet" href = "{{ url_for('static', filename='styles.css') }}">
+    <title>Webpage Layout</title>
+</head>
+<body>
+    <header>
+            <img src="{{ url_for('static', filename='images/Bluboy-Logo-1.jpg') }}" alt="Logo" alignment="border-left" padding-left: 60px;>
+            <div style="float: right; padding-right: 20px; color: white;">
+                {{ username }}
+    <a href="{{ url_for('logout') }}" style="color: white;">Logout</a>
+    </div>
+    </header>
+<!-- BACK BUTTON -->
+<a href="{{url_for('option')}}">
+<div class="options_container">
+        <div class="back-btn flex align-center ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+            </svg>
+            Back
+        </div>
+    </div>
+</a>
+<!-- END BACK BUTTON -->
+        <h1 style="color: white;padding-left: 60px;">Firebase Notification Manager</h1>
+        <div class="header-inputs-container">
+            <div class="header-inputs">
+                <input id="title-input" type="text" placeholder="Enter Title">
+                
+                <textarea id="message-input" placeholder="Enter Message"></textarea>
+            </div>
+            <select id="templateDropdown" >
+                <option value="">Select Template</option>
+            </select>
+            <div>
+                <button id="send-button" disabled>
+                    <img src="{{ url_for('static', filename='images/send.jpg') }}" alt="Send" class="grayscale">
+                </button>
+            </div>
+        </div>
+    
+    <div class="container">
+        <div class="part part-1">
+            <h2>List Of Users</h2>
+            <div class="search-container">
+                <input id="search-user-list" class="search-input" type="text" placeholder="Search users">
+                <button id="select-all-users" class="select-all-button">Select All</button>
+            </div>
+            <p id="empty-message-part1" class="empty-message">Users are empty</p>
+            <ul id="user-list"></ul>
+        </div>
+        <div class="part part-2">
+            <button id="move-all-users-button" class="part-button" style="background-color: #59C41C;">ALL</button>
+            <button id="move-selected-users-button" class="part-button"> &gt; </button>
+            <button id="move-selected-back-button" class="part-button"> &lt; </button>
+        </div>
+        <div class="part part-3">
+            <h2>Selected Users</h2>
+            <div class="search-container">
+                <input id="search-user-list-part3" class="search-input" type="text" placeholder="Search users">
+                <button id="select-all-users-part3" class="select-all-button">Select All</button>
+            </div>
+            <p id="empty-message-part3" class="empty-message">Users are empty</p>
+            <ul id="user-list-part3"></ul>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <div id="progress-bar" class="progress-bar hidden">
+                <div id="progress" class="progress"></div>
+                <span id="progress-text" class="progress-text"></span>
+            </div>
+        </div>
+    </footer>
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

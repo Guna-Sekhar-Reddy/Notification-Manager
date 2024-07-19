@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles_topic.css') }}"
+    />
+    <title>BluBoy</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='images/Bluboy-Logo-1.jpg') }}"
+        alt="Logo"
+        alignment="border-left"
+        padding-left:
+        60px;
+      />
+      <div style="float: right; padding-right: 20px; color: white">
+        {{ username }}
+        <a href="{{ url_for('logout') }}" style="color: white">Logout</a>
+      </div>
+    </header>
+    <a href="{{url_for('option')}}">
+      <div class="options_container">
+        <div class="back-btn flex align-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class=""
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+            />
+          </svg>
+          Back
+        </div>
+      </div>
+    </a>
+    <h1>Topics</h1>
+    <div class="topic-inputs-container">
+      <div class="topic-inputs flex g-10">
+        <div class="flex justify-center select-container">
+          <select id="templateDropdown">
+            <option value="">Select Topic</option>
+          </select>
+        </div>
+      </div>
+      <div class="topic-inputs flex">
+        <input
+          id="title-input"
+          type="text"
+          placeholder="Enter Title"
+          class="grow-1"
+        />
+      </div>
+      <div class="topic-inputs flex g-10" id="topic-text-area">
+        <textarea
+          id="message-input"
+          placeholder="Enter Message"
+          class="grow-1"
+        ></textarea>
+        <div class="topic-btn grow-1 flex justify-center">
+          <button id="send-button" class="w-100 topic-btn disabled" disabled>
+            <img
+              src="{{ url_for('static', filename='../static/images/send.jpg') }}"
+              alt="Send"
+              class="grayscale"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+ 
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sendButton = document.getElementById("send-button");
+        const titleInput = document.getElementById("title-input");
+        const messageInput = document.getElementById("message-input");
+        const dropdown = document.getElementById("templateDropdown");
+ 
+        fetch('{{ url_for("get_topics_route") }}')
+          .then((response) => response.json())
+          .then((data) => {
+            data.forEach((topic) => {
+              const option = document.createElement("option");
+              option.value = topic;
+              option.textContent = topic;
+              dropdown.appendChild(option);
+            });
+          })
+          .catch((error) => console.error("Error fetching topics:", error));
+ 
+        function checkInputs() {
+          const title = titleInput.value.trim();
+          const message = messageInput.value.trim();
+          const topicName = dropdown.value;
+ 
+          if (title && message && topicName) {
+            sendButton.classList.remove("disabled");
+            sendButton.removeAttribute("disabled");
+          } else {
+            sendButton.classList.add("disabled");
+            sendButton.setAttribute("disabled", "true");
+          }
+        }
+ 
+        titleInput.addEventListener("input", checkInputs);
+        messageInput.addEventListener("input", checkInputs);
+        dropdown.addEventListener("change", checkInputs);
+ 
+        sendButton.addEventListener("click", function () {
+          const title = titleInput.value;
+          const message = messageInput.value;
+          const topicName = dropdown.value;
+ 
+          sendButton.classList.add("shrink");
+ 
+          setTimeout(() => {
+            sendButton.classList.remove("shrink");
+          }, 300); // Adjust duration to match the CSS animation
+ 
+          fetch('{{ url_for("send_notification") }}', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+              title: title,
+              message: message,
+              topic: topicName,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                console.log(
+                  `Notification sent successfully to ${data.response} devices`
+                );
+              } else {
+                console.error("Error sending notification:", data.error);
+              }
+            })
+            .catch((error) =>
+              console.error("Error sending notification:", error)
+            );
+        });
+      });
+    </script>
+  </body>
+</html>
+ 
