@@ -1,4 +1,3 @@
-[]
 # Firebase Notification Manager
 
 
